@@ -1,7 +1,8 @@
 import './employees-list-item.css';
 
-const EmployeesListItem = ({name, salary}) => {
+const EmployeesListItem = ({name, salary, increase}) => {
 	return (
+		
 		// ! defaultValue атрибут Реакта
 		<li className="list-group-item d-flex justufy-content-between">
 			<span className="list-group-item-label">{name}</span>

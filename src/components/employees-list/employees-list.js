@@ -9,8 +9,11 @@ const EmployeesList = ({data}) => {
 	// ? map() перебирает и возвращает массив в переменную elements
 	const elements = data.map(item => {
 		return (
+			// ! разворачиваем item через ...spread оператор
+			<EmployeesLisItem {...item} />
+
 			// * назначаем пропсы из item - объект из data from app.js
-			<EmployeesLisItem name={item.name} salary={item.salary}/>
+			// <EmployeesLisItem name={item.name} salary={item.salary}/>
 		)
 	})
 

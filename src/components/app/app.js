@@ -11,9 +11,9 @@ function App() {
 
 	// ! Imitation Server
 	const data = [
-				{name: 'Maxim N.', salary: 800},
-				{name: 'ALexsander M.', salary: 31000},
-				{name: 'Evgenyi T.', salary: 25000},
+				{name: 'Maxim N.', salary: 18000, increase: true},
+				{name: 'ALexsander M.', salary: 25000, increase: false},
+				{name: 'Evgenyi T.', salary: 32000, increase: true},
 	];
 
 	return (
