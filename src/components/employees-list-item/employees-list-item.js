@@ -1,12 +1,21 @@
 import './employees-list-item.css';
 
 const EmployeesListItem = ({name, salary, increase}) => {
+
+	// ? оборачиваем в переменную классы
+	let classNames = "list-group-item d-flex justufy-content-between";
+
+	// * проверяем на условие если increase: true from app.js 
+	if (increase) {
+		classNames += ' increase'; // * тогда доб класс .increase from css
+	}
+	
 	return (
-		
-		// ! defaultValue атрибут Реакта
-		<li className="list-group-item d-flex justufy-content-between">
+		<li className={classNames}>
 			<span className="list-group-item-label">{name}</span>
+			
 			{/* // todo подключаем пропс {props.salary} со значениями из employees-list.js */}
+			{/* // ! defaultValue атрибут Реакта */}
 			<input type="text" className='list-group-item-input' defaultValue={salary + '$'}/> 
 			<div className="d-flex justify-content-center align-items-center">
 
