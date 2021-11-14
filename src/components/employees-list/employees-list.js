@@ -20,7 +20,13 @@ const EmployeesList = ({data}) => {
 		)
 	})
 
-	// console.log(elements);
+	// ! если id не написали на бэкэнде. так можно только если порядок элементов (данных с бэка) меняться не будет
+	// const elements = data.map((item, i) => {
+	// 	const {id, ...itemProps} = item;
+	// 	return (
+	// 		<EmployeesLisItem key={i} {...itemProps} />
+	// 	)
+	// })
 
 	return (
 		<ul className="app-list list-group">
