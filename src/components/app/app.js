@@ -11,9 +11,10 @@ function App() {
 
 	// ! Imitation Server
 	const data = [
-				{name: 'Maxim N.', salary: 18000, increase: true},
-				{name: 'ALexsander M.', salary: 25000, increase: false},
-				{name: 'Evgenyi T.', salary: 32000, increase: true},
+				// ? id: это потом будет атрибут key - благодаря key реакт понимает что этот компонент не надо перересовывать
+				{name: 'Maxim N.', salary: 18000, increase: false, id: 1},
+				{name: 'ALexsander M.', salary: 25000, increase: true, id: 2},
+				{name: 'Evgenyi T.', salary: 32000, increase: false, id: 3},
 	];
 
 	return (

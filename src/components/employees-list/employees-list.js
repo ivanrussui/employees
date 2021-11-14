@@ -8,14 +8,19 @@ const EmployeesList = ({data}) => {
 
 	// ? map() перебирает и возвращает массив в переменную elements
 	const elements = data.map(item => {
+		// ! используем деструктуризацию чтобы вытаскивать отдельно id из data from app.js
+		const {id, ...itemProps} = item;
+
 		return (
-			// ! разворачиваем item через ...spread оператор
-			<EmployeesLisItem {...item} />
+			// ? благодаря key реакт понимает что этот компонент не надо перересовывать
+			<EmployeesLisItem key={id} {...itemProps} />
 
 			// * назначаем пропсы из item - объект из data from app.js
 			// <EmployeesLisItem name={item.name} salary={item.salary}/>
 		)
 	})
+
+	// console.log(elements);
 
 	return (
 		<ul className="app-list list-group">
