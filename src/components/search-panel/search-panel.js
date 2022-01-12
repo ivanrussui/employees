@@ -4,7 +4,7 @@ const SearchPanel = () => {
 	return (
 		<input 
 				type='text' 
-				className='form-control search-input' // ? эти классы из бутстрапа
+				className='form-control search-input' // ? эти классы из бутстрапа. search-input похоже бесполезный класс))
 				placeholder='Найти сотрудника'/>
 	)
 }
