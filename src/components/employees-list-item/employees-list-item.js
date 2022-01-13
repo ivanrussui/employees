@@ -6,7 +6,8 @@ class EmployeesListItem extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			increase: false
+			increase: false,
+			like: false
 		}
 	}
 
@@ -17,9 +18,15 @@ class EmployeesListItem extends Component{
 		}))
 	}
 
+	onLike = () => {
+		this.setState(({like}) => ({
+			like: !like
+		}))
+	}
+
 	render() {
 		const {name, salary} = this.props;
-		const {increase} = this.state;
+		const {increase, like} = this.state;
 
 		// ? оборачиваем в переменную классы
 		let classNames = "list-group-item d-flex justufy-content-between";
@@ -28,10 +35,16 @@ class EmployeesListItem extends Component{
 		if (increase) {
 			classNames += ' increase'; // * тогда доб класс .increase from css
 		}
+
+		if (like) {
+			classNames += ' like';
+		}
 		
 		return (
 			<li className={classNames}>
-				<span className="list-group-item-label">{name}</span>
+				<span className="list-group-item-label"
+					  onClick={this.onLike}>
+					  {name}</span>
 				
 				{/* // todo подключаем пропс {props.salary} со значениями из employees-list.js */}
 				{/* // ! defaultValue атрибут Реакта */}
