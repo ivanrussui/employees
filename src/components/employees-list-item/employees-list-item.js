@@ -25,10 +25,9 @@ class EmployeesListItem extends Component{
 	}
 
 	render() {
-		const {name, salary} = this.props;
+		const {name, salary, onDelete} = this.props; // ? onDelete приходит из др файла от родителя
 		const {increase, like} = this.state;
 
-		// ? оборачиваем в переменную классы
 		let classNames = "list-group-item d-flex justufy-content-between";
 
 		// * проверяем на условие если increase: true from app.js 
@@ -58,7 +57,9 @@ class EmployeesListItem extends Component{
 					</button>
 					
 					<button type='button'
-							className='btn-trash.btn-sm'>
+							className='btn-trash btn-sm'
+							// ? onDelete приходит из др файла от родителя
+							onClick={onDelete}> 
 						<i className="fas fa-trash"></i>		
 					</button>
 

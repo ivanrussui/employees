@@ -1,3 +1,5 @@
+import { Component } from 'react';
+
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
 import AppFilter from '../app-filter/app-filter';
@@ -7,31 +9,56 @@ import EmployeesAddForm from '../employees-add-form/employees-add-form';
 import './app.css';		// * импортируем стили
 
 
-function App() {
-
-	// ! Imitation Server
-	const data = [
-				// ? id: это потом будет атрибут key - благодаря key реакт понимает что этот компонент не надо перересовывать
+class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: [
 				{name: 'Maxim N.', salary: 18000, increase: false, id: 1},
 				{name: 'ALexsander M.', salary: 25000, increase: true, id: 2},
 				{name: 'Evgenyi T.', salary: 32000, increase: false, id: 3},
-	];
+			]
+		}
+	}
 
-	return (
-		<div className='app'>
-			<AppInfo/>
+	deleteItem = (id) => {
+		this.setState(({data}) => {
 
-			<div className='search-panel'>
-				<SearchPanel/>
-				<AppFilter/>
+			// ? 1 вариант правильного изменения состояния
+			// const index = data.findIndex(elem => elem.id === id); // findIndex() метод находит индекс объекта (элемента)
+
+			// const before = data.slice(0, index);
+			// const after = data.slice(index + 1);
+
+			// const newArr = [...before, ...after]; // так мы создали новый массив с нужными изменениями, не меняя старый
+			// return {
+			// 	data: newArr
+			// }
+
+			// * 2 вариант правильного изменения состояния
+			return {
+				data: data.filter(item => item.id!== id)
+			}
+		})
+	}
+
+	render() {
+		return (
+			<div className='app'>
+				<AppInfo/>
+	
+				<div className='search-panel'>
+					<SearchPanel/>
+					<AppFilter/>
+				</div>
+	
+				<EmployeesList 
+					data={this.state.data}
+					onDelete={this.deleteItem}/> {/* // ? onDelete из файла employees-list.js */}
+				<EmployeesAddForm/>
 			</div>
-
-			{/* 	// ! получаем данные Imitation Server {data} */}
-			{/* // * когда передаем так пропс, то потом можем использовать его внутри компонента EmployeesList */}
-			<EmployeesList data={data}/>
-			<EmployeesAddForm/>
-		</div>
-	);
+		);
+	}
 }
 
 export default App;		// ! экспортируем по умолчанию компонент
