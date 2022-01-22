@@ -11,7 +11,8 @@ const EmployeesList = ({data, onDelete}) => {
 			<EmployeesListItem 
 				key={id}
 				{...itemProps}
-				onDelete={() => onDelete(id)} /> // придумываем пропс как обработчик и передаем функ которая написана в app.js
+				onDelete={() => onDelete(id)}
+				onUpdate={() => console.log('Update')} /> // придумываем пропс как обработчик и передаем функ которая написана в app.js
 		)
 	})
 
