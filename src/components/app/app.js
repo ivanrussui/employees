@@ -8,15 +8,14 @@ import EmployeesAddForm from '../employees-add-form/employees-add-form';
 
 import './app.css';		// * импортируем стили
 
-
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			data: [
-				{name: 'Maxim N.', salary: 18000, increase: false, id: 1},
-				{name: 'ALexsander M.', salary: 25000, increase: true, id: 2},
-				{name: 'Evgenyi T.', salary: 32000, increase: false, id: 3},
+				{name: 'Maxim N.', salary: 18000, increase: false, rise: true, id: 1},
+				{name: 'ALexsander M.', salary: 25000, increase: true, rise: false, id: 2},
+				{name: 'Evgenyi T.', salary: 32000, increase: false, rise: false, id: 3},
 			]
 		}
 		this.maxId = 4;
@@ -48,6 +47,7 @@ class App extends Component {
 			name,
 			salary,
 			increase: false,
+			rise: false,
 			id: this.maxId++
 		}
 		this.setState(({data}) => {
@@ -56,6 +56,34 @@ class App extends Component {
 					data: newArr
 				}
 		});
+	}
+
+	onToggleIncrease = (id) => {
+		// this.setState(({data}) => {
+		// 	const index = data.findIndex(elem => elem.id === id); // получаем индекс элемента с которым бу работать
+
+		// 	const old = data[index]; // получ старый объект
+		// 	const newItem = {...old, increase: !old.increase}; // ...old получаем новый объект из старого не нарушая иммутабельность, это копия старого.  increase: !old.increase берет значение из old и меняет их на противоположные
+		// 	const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]; // ...data.slice(0, index) тут разворачиваем все объекты до того который изменился / newItem доб нов измененный элемент / ...data.slice(index + 1) это остаток от массива
+
+		// 	return {
+		// 		data: newArr
+		// 	}
+		// })
+
+		// ! Алгоритм альтернатива попроще с использованием map()
+		this.setState(({data}) => ({
+			data: data.map(item => {  // map() возвращ нов массив. item - каждый отдельный объект внутри массива
+				if (item.id === id) { // item.id === id - каждый id внутри этого объекта совпал с id внутри метода onToggleIncrease
+					return {...item, increase: !item.increase} // возращаем новый объект с свойствами item / increase: !item.increase берет значение из item и меняет их на противоположные
+				}
+				return item; // условие не срабатывает, то возращ item
+			})
+		}))
+	}
+
+	onToggleRise = (id) => {
+		console.log(`Rise this ${id}`);
 	}
 
 	render() {
@@ -70,7 +98,9 @@ class App extends Component {
 	
 				<EmployeesList 
 					data={this.state.data}
-					onDelete={this.deleteItem}/> {/* // ? onDelete из файла employees-list.js */}
+					onDelete={this.deleteItem}
+					onToggleIncrease={this.onToggleIncrease}
+					onToggleRise={this.onToggleRise}/>
 				<EmployeesAddForm onAdd={this.addItem}/>
 			</div>
 		);
