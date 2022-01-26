@@ -6,7 +6,7 @@ import AppFilter from '../app-filter/app-filter';
 import EmployeesList from '../employees-list/employees-list';
 import EmployeesAddForm from '../employees-add-form/employees-add-form';
 
-import './app.css';		// * импортируем стили
+import './app.css';
 
 class App extends Component {
 	constructor(props) {
@@ -58,7 +58,8 @@ class App extends Component {
 		});
 	}
 
-	onToggleIncrease = (id) => {
+	// ! Код более читабелен, но длинее
+	// onToggleIncrease = (id) => {
 		// this.setState(({data}) => {
 		// 	const index = data.findIndex(elem => elem.id === id); // получаем индекс элемента с которым бу работать
 
@@ -70,26 +71,50 @@ class App extends Component {
 		// 		data: newArr
 		// 	}
 		// })
+	// }
 
-		// ! Алгоритм альтернатива попроще с использованием map()
+	// ! Алгоритм альтернатива попроще с использованием map()
+	// onToggleIncrease = (id) => {
+	// 	this.setState(({data}) => ({
+	// 		data: data.map(item => {  // map() возвращ нов массив. item - каждый отдельный объект внутри массива
+	// 			if (item.id === id) { // item.id === id - каждый id внутри этого объекта совпал с id внутри метода onToggleIncrease
+	// 				return {...item, increase: !item.increase} // возращаем новый объект с свойствами item / increase: !item.increase берет значение из item и меняет их на противоположные
+	// 			}
+	// 			return item; // условие не срабатывает, то возращ item
+	// 		})
+	// 	}))
+	// }
+
+	// onToggleRise = (id) => {
+	// 	this.setState(({data}) => ({
+	// 		data: data.map(item => {
+	// 			if (item.id === id) {
+	// 				return {...item, rise: !item.rise}
+	// 			}
+	// 			return item;
+	// 		})
+	// 	}))
+	// }
+
+	// ? чтобы не писать 2 раза похожий функционал onToggleIncrease и onToggleRise, оптимизируем
+	onToggleProp = (id, prop) => {
 		this.setState(({data}) => ({
-			data: data.map(item => {  // map() возвращ нов массив. item - каждый отдельный объект внутри массива
-				if (item.id === id) { // item.id === id - каждый id внутри этого объекта совпал с id внутри метода onToggleIncrease
-					return {...item, increase: !item.increase} // возращаем новый объект с свойствами item / increase: !item.increase берет значение из item и меняет их на противоположные
+			data: data.map(item => {
+				if (item.id === id) {
+					return {...item, [prop]: !item[prop]}
 				}
-				return item; // условие не срабатывает, то возращ item
+				return item;
 			})
 		}))
 	}
 
-	onToggleRise = (id) => {
-		console.log(`Rise this ${id}`);
-	}
-
 	render() {
+		const employees = this.state.data.length;
+		const increased = this.state.data.filter(item => item.increase).length;
+
 		return (
 			<div className='app'>
-				<AppInfo/>
+				<AppInfo employees={employees} increased={increased} />
 	
 				<div className='search-panel'>
 					<SearchPanel/>
@@ -99,8 +124,7 @@ class App extends Component {
 				<EmployeesList 
 					data={this.state.data}
 					onDelete={this.deleteItem}
-					onToggleIncrease={this.onToggleIncrease}
-					onToggleRise={this.onToggleRise}/>
+					onToggleProp={this.onToggleProp}/>
 				<EmployeesAddForm onAdd={this.addItem}/>
 			</div>
 		);
