@@ -20,12 +20,23 @@ class EmployeesAddForm extends Component {
 
 	// ? метод для отправки формы
 	onSubmit = (e) => {
-    e.preventDefault();
-		this.props.onAdd(this.state.name, this.state.salary);
-		this.setState({
+		e.preventDefault();
+		// * мой вариант
+		// if (this.state.name.length >= 3 && this.state.salary !== '') {
+		// 	this.props.onAdd(this.state.name, this.state.salary);
+		// 	this.setState({
+		// 		name: '',
+		// 		salary: ''
+		// 	})
+		// }
+		// * вариант из ответов
+	      if (this.state.name.length < 3 || !this.state.salary) return;
+	    	this.props.onAdd(this.state.name, this.state.salary);
+			this.setState({
 				name: '',
 				salary: ''
-		})
+			})
+
   }
 	
 	render() {
