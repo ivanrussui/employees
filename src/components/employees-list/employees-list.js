@@ -1,4 +1,3 @@
-// ! импортируем другой компонент 
 import EmployeesListItem from '../employees-list-item/employees-list-item';
 
 import './employees-list.css';
