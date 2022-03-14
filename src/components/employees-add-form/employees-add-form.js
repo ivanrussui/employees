@@ -3,14 +3,13 @@ import { Component } from 'react';
 // import './employees-add-form.css';
 import './employees-add-form.scss';
 
+// в синтаксе полей классов можно создавать сойства без конструктора
 class EmployeesAddForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      salary: '',
-    };
-  }
+
+  state = {
+    name: '',
+    salary: '',
+  };
 
   onValueChange = (e) => {
     // ? передаем (объект событие) чтобы потом отменить по умолч поведение
@@ -38,6 +37,12 @@ class EmployeesAddForm extends Component {
       salary: '',
     });
   };
+
+	static onLog = () => {
+		console.log('Hi');
+	}
+
+	static logged = 'on';
 
   render() {
     const { name, salary } = this.state;
@@ -72,4 +77,6 @@ class EmployeesAddForm extends Component {
   }
 }
 
+EmployeesAddForm.onLog(); // компонент.статич метод
+console.log(EmployeesAddForm.logged);
 export default EmployeesAddForm;
